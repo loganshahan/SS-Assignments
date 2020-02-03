@@ -300,12 +300,7 @@ public class Books {
 //			String userInput;
 			System.out.println("Choose Book ID");
 			int optionId = validOption();
-//			userInput = Main.sc.nextLine();
-//			System.out.println("Select ID");
-//			userInput = Main.sc.nextLine();
-//			int option = Integer.parseInt(userInput);
-//			System.out.println("Change Author name");
-//			String newAuthor = Main.sc.nextLine();
+//			
 //			
 			try{
 				BufferedReader bufStream = new BufferedReader (new FileReader(fileName));
