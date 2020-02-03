@@ -201,8 +201,10 @@ public class Author {
 					System.out.println("Authors are empty");
 				}
 				String userInput;
+				int optionId;
 				System.out.println("Choose author ID");
 				userInput = Main.sc.nextLine();
+//				optionId = validOption();
 					
 				try(BufferedReader buffStream = new BufferedReader (new FileReader(fileName))) {
 					StringBuffer buffer = new StringBuffer();
