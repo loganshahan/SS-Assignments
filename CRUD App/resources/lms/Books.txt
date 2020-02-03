@@ -1,0 +1,10 @@
+1	Lord of the Rings	3
+2	Green Eggs and Ham	9
+3	Harry Potter and the Sorcerer Stone	10
+4	Patriot Games	2
+5	Siddhartha	6
+6	Adventures of Tom Sawyer	8
+7	On The Road	5
+8	The Old Man and the Sea	7
+9	Game of Thrones	4
+10	The Stand	1
