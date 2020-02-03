@@ -43,7 +43,7 @@ public class Main {
 		
 	}
 	public static int validInt(int maxOption) {
-		//scanner input validator to make sure number is one of options
+		//scanner input validator to make sure number is one of options(less than max option)
 		String userInput;
 		int number = 0;
 		boolean hasValidNumber =  false;
@@ -63,6 +63,7 @@ public class Main {
 		return number;	
 	}
 	public static String inputValid() {
+		//make sure entry ins't blank
 		String userInput = null;
 		boolean validInput = false;
 		do {

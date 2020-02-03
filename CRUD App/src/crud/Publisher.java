@@ -131,44 +131,44 @@ public class Publisher {
 			}catch(Exception e) {
 			System.out.println("Publisherss are empty");
 			}
-			System.out.println("Choose Publisher ID");
-			int optionId = validOption();
-			System.out.println("Change Pubisher name");
-//			name = Main.sc.nextLine();
-			name = Main.inputValid();
-			System.out.println("Change publisher address");
-//			address = Main.sc.nextLine();
-			address = Main.inputValid();
-			try{
-				BufferedReader bufStream = new BufferedReader (new FileReader(fileName));
-				StringBuffer buffer = new StringBuffer();
-				String line;
-				while ((line = bufStream.readLine()) != null) {
-					String optionIdString = Integer.toString(optionId);
-				if(optionIdString.equals(line.substring(0, 1))) {
-		            line =  optionId + "," + name + "," + address;
-		            buffer.append(line);
-		            buffer.append('\n');
-				}else {
-					buffer.append(line);
-		            buffer.append('\n');
+				System.out.println("Choose Publisher ID or enter 0 to go back");
+				int optionId = validOption();
+				if(optionId !=0) {
+				System.out.println("Change Pubisher name");
+	//			name = Main.sc.nextLine();
+				name = Main.inputValid();
+				System.out.println("Change publisher address");
+	//			address = Main.sc.nextLine();
+				address = Main.inputValid();
+				try{
+					BufferedReader bufStream = new BufferedReader (new FileReader(fileName));
+					StringBuffer buffer = new StringBuffer();
+					String line;
+					while ((line = bufStream.readLine()) != null) {
+						String optionIdString = Integer.toString(optionId);
+						if(optionIdString.equals(line.substring(0, 1))) {
+				            line =  optionId + "," + name + "," + address;
+						}
+				        buffer.append(line);
+				        buffer.append('\n');
+					
+			        }
+					String inputString = buffer.toString();
+					System.out.println(inputString);
+					FileWriter filewriter = new FileWriter(new File(fileName));
+					filewriter.write(inputString);
+					filewriter.close();
+					
+				}catch(Exception e){
+					System.out.println("Unable to edit");
 				}
-		        }
-				String inputString = buffer.toString();
-				System.out.println(inputString);
-				FileWriter filewriter = new FileWriter(new File(fileName));
-				filewriter.write(inputString);
-				filewriter.close();
 				
-			}catch(Exception e){
-				System.out.println("Unable to edit");
-			}
 			
-		
-			
-			System.out.println("Author succesfully updated");
-			Publisher p = mapP.get(optionId);
-			p.publisherName = name;
+				
+				System.out.println("Author succesfully updated");
+				Publisher p = mapP.get(optionId);
+				p.publisherName = name;
+				}	
 	}
 	public static void delete() {
 		
@@ -178,7 +178,7 @@ public class Publisher {
 	}
 	public static void deletePublishers() {
 		//reads file
-		int optionId;
+		
 		try(BufferedReader bufStream = new BufferedReader (new FileReader(fileName))){
 			String line = bufStream.readLine();
 			while(line!=null) {
@@ -192,57 +192,66 @@ public class Publisher {
 			System.out.println("Authors are empty");
 		}
 		String userInput;
-		System.out.println("Choose author ID");
-		userInput = Main.sc.nextLine();
-//		optionId = validOption();
-			
-		try(BufferedReader buffStream = new BufferedReader (new FileReader(fileName))) {
-			StringBuffer buffer = new StringBuffer();
-			String line;
-			while ((line = buffStream.readLine()) != null) {
-				//finds id and skips line then appends rest of file
-				if(userInput.equals(line.substring(0, 1))) continue; {
-		            buffer.append(line);
-		            buffer.append('\n');
-		        }
+		int optionId;
+		System.out.println("Choose Publisher ID or enter 0 to go back");
+		optionId = validOption();
+		userInput =Integer.toString(optionId);
+		
+		if (optionId != 0) {	
+			try(BufferedReader buffStream = new BufferedReader (new FileReader(fileName))) {
+				StringBuffer buffer = new StringBuffer();
+				String line;
+				while ((line = buffStream.readLine()) != null) {
+					//finds id and skips line then appends rest of file
+					if(userInput.equals(line.substring(0, 1))) continue; {
+			            buffer.append(line);
+			            buffer.append('\n');
+			        }
+					String inputString = buffer.toString();
+					FileWriter filewriter = new FileWriter(new File(fileName));
+					filewriter.write(inputString);
+					filewriter.close();
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				System.out.println("Unable to edit author");
+			}
+			try (BufferedReader bufffStream = new BufferedReader ( new FileReader("resources/lms/BooksTest.txt"))) {
+				StringBuffer buffer = new StringBuffer();
+				String line;
+				while ((line = bufffStream.readLine()) != null) {
+					String [] arr = line.split(",");
+					if(userInput.equals(arr[3])) {
+						Books.mapB.remove(Integer.parseInt(arr[0]));
+						continue;
+					} else {
+						buffer.append(line);
+						buffer.append('\n');
+					}
+				}
 				String inputString = buffer.toString();
-				FileWriter filewriter = new FileWriter(new File(fileName));
+				FileWriter filewriter = new FileWriter(new File("resources/lms/BooksTest.txt"));
 				filewriter.write(inputString);
 				filewriter.close();
+			}catch(Exception e){
+				System.out.println("Unable to edit book");
 			}
-		}catch(Exception e){
-			e.printStackTrace();
-			System.out.println("Unable to edit author");
+			
+			System.out.println("Publisher's Books succesfully deleted");
 		}
-		try (BufferedReader bufffStream = new BufferedReader ( new FileReader("resources/lms/BooksTest.txt"))) {
-			StringBuffer buffer = new StringBuffer();
-			String line;
-			while ((line = bufffStream.readLine()) != null) {
-				String [] arr = line.split(",");
-				if(userInput.equals(arr[3])) {
-					Books.mapB.remove(Integer.parseInt(arr[0]));
-					continue;
-				} else {
-					buffer.append(line);
-					buffer.append('\n');
-				}
-			}
-			String inputString = buffer.toString();
-			FileWriter filewriter = new FileWriter(new File("resources/lms/BooksTest.txt"));
-			filewriter.write(inputString);
-			filewriter.close();
-		}catch(Exception e){
-			System.out.println("Unable to edit book");
-		}
-		
-		System.out.println("Publisher's Books succesfully deleted");
 	}
 
 	public static int validOption() {
 		String userInput;
 		int number = 0;
 		boolean hasValidOption =  false;
-		int goBack = Collections.max(mapP.keySet()) +1;
+		int goBack;
+		if (mapP.isEmpty()) {
+			goBack = 0;
+		} else {
+			goBack = Collections.max(mapP.keySet()) + 1;
+		}
+
 		do {
 			try {
 				userInput = Main.sc.nextLine();
