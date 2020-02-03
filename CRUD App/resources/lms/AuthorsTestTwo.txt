@@ -1,4 +1,1 @@
-0,charle dickens
-1,stephen king
-2,roald dahl
-3,george martin
+0,charles dickens

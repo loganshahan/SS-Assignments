@@ -62,6 +62,23 @@ public class Main {
 		}while(!hasValidNumber);
 		return number;	
 	}
+	public static String inputValid() {
+		String userInput = null;
+		boolean validInput = false;
+		do {
+			try {
+				userInput = sc.nextLine();
+				if(userInput.length() >= 3 && userInput.length()<=50) {
+					validInput = true;
+				}else {
+					System.out.println("Please enter valid input range");
+				}
+			}catch(Exception e) {
+				System.out.println("Please enter valid input");
+			}
+		}while(!validInput);
+		return userInput;
+	}
 	
 	
 }

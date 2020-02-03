@@ -180,7 +180,7 @@ public class Author {
 	}
 	public static void delete() {
 		
-			deleteAuthors();
+			deleteAuthorwithBooks();
 			Author.menu();
 		
 	}
@@ -203,6 +203,7 @@ public class Author {
 			userInput = Main.sc.nextLine();
 			
 			try{
+				//reads file and puts into buffer
 				BufferedReader bufStream = new BufferedReader (new FileReader(fileName));
 				StringBuffer buffer = new StringBuffer();
 				String line;
@@ -216,13 +217,72 @@ public class Author {
 				FileWriter filewriter = new FileWriter(new File(fileName));
 				filewriter.write(inputString);
 				filewriter.close();
-				
+				bufStream.close();
 				}}catch(Exception e){
 				System.out.println("Unable to edit");
 			}
 			
 			System.out.println("Author succesfully deleted");
-
+			
+	}
+	public static void deleteAuthorwithBooks() {
+		//reads file
+				try(BufferedReader bufStream = new BufferedReader (new FileReader(fileName))){
+					String line = bufStream.readLine();
+					while(line!=null) {
+						int id = Integer.parseInt(line.substring(0, line.indexOf(",")));
+						String name = line.substring(line.indexOf(",")+1, line.length());
+						System.out.println("Author Name: "+name+" with ID: "+id);
+						line = bufStream.readLine();
+					}
+					
+				}catch(Exception e) {
+					System.out.println("Authors are empty");
+				}
+				String userInput;
+				System.out.println("Choose author ID");
+				userInput = Main.sc.nextLine();
+					
+				try(BufferedReader buffStream = new BufferedReader (new FileReader(fileName))) {
+					StringBuffer buffer = new StringBuffer();
+					String line;
+					while ((line = buffStream.readLine()) != null) {
+						//finds id and skips line then appends rest of file
+						if(userInput.equals(line.substring(0, 1))) continue; {
+				            buffer.append(line);
+				            buffer.append('\n');
+				        }
+						String inputString = buffer.toString();
+						FileWriter filewriter = new FileWriter(new File(fileName));
+						filewriter.write(inputString);
+						filewriter.close();
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+					System.out.println("Unable to edit author");
+				}
+				try (BufferedReader bufffStream = new BufferedReader ( new FileReader("resources/lms/BooksTest.txt"))) {
+					StringBuffer buffer = new StringBuffer();
+					String line;
+					while ((line = bufffStream.readLine()) != null) {
+						String [] arr = line.split(",");
+						if(userInput.equals(arr[2])) {
+							Books.mapB.remove(Integer.parseInt(arr[0]));
+							continue;
+						} else {
+							buffer.append(line);
+							buffer.append('\n');
+						}
+					}
+					String inputString = buffer.toString();
+					FileWriter filewriter = new FileWriter(new File("resources/lms/BooksTest.txt"));
+					filewriter.write(inputString);
+					filewriter.close();
+				}catch(Exception e){
+					System.out.println("Unable to edit book");
+				}
+				
+				System.out.println("Author's Books succesfully deleted");
 	}
 	
 	public static int validOption() {
