@@ -96,7 +96,8 @@ public class Author {
 		int id = 0;
 		String name = null;
 		System.out.println("Add new author");
-		userInput = Main.sc.nextLine();
+//		userInput = Main.sc.nextLine();
+		userInput = Main.inputValid();
 		try(FileWriter filewriter = new FileWriter(new File(fileName),true)){
 			//increment id and add userinput for name
 			id = nextID;
@@ -142,8 +143,8 @@ public class Author {
 		//make sure option exists
 		int optionId = validOption();
 		System.out.println("Change Author name");
-		name = Main.sc.nextLine();
-		
+//		name = Main.sc.nextLine();
+		name = Main.inputValid();
 		try{
 			//read file and put into buffer
 			BufferedReader bufStream = new BufferedReader (new FileReader(fileName));
@@ -184,47 +185,7 @@ public class Author {
 			Author.menu();
 		
 	}
-	public static void deleteAuthors() {
-		//reads file
-		try(BufferedReader bufStream = new BufferedReader (new FileReader(fileName))){
-			String line = bufStream.readLine();
-			while(line!=null) {
-				int id = Integer.parseInt(line.substring(0, line.indexOf(",")));
-				String name = line.substring(line.indexOf(",")+1, line.length());
-				System.out.println("Author Name: "+name+" with ID: "+id);
-				line = bufStream.readLine();
-			}
-			
-			}catch(Exception e) {
-			System.out.println("Authors are empty");
-			}
-			String userInput;
-			System.out.println("Choose author ID");
-			userInput = Main.sc.nextLine();
-			
-			try{
-				//reads file and puts into buffer
-				BufferedReader bufStream = new BufferedReader (new FileReader(fileName));
-				StringBuffer buffer = new StringBuffer();
-				String line;
-				while ((line = bufStream.readLine()) != null) {
-					//finds id and skips line then appends rest of file
-				if(userInput.equals(line.substring(0, 1))) continue; {
-		            buffer.append(line);
-		            buffer.append('\n');
-		        }
-				String inputString = buffer.toString();
-				FileWriter filewriter = new FileWriter(new File(fileName));
-				filewriter.write(inputString);
-				filewriter.close();
-				bufStream.close();
-				}}catch(Exception e){
-				System.out.println("Unable to edit");
-			}
-			
-			System.out.println("Author succesfully deleted");
-			
-	}
+	
 	public static void deleteAuthorwithBooks() {
 		//reads file
 				try(BufferedReader bufStream = new BufferedReader (new FileReader(fileName))){

@@ -88,11 +88,11 @@ public class Publisher {
 		String name = null;
 		String address = null;
 		System.out.println("Add new publisher name");
-		name = Main.sc.nextLine();
-//		System.out.println("Add name");
 //		name = Main.sc.nextLine();
+		name = Main.inputValid();
 		System.out.println("Add new publisher address");
-		address = Main.sc.nextLine();
+//		address = Main.sc.nextLine();
+		address = Main.inputValid();
 		try(FileWriter filewriter = new FileWriter(new File(fileName),true)){
 			id= nextID;
 //			name = userInput;
@@ -134,9 +134,11 @@ public class Publisher {
 			System.out.println("Choose Publisher ID");
 			int optionId = validOption();
 			System.out.println("Change Pubisher name");
-			name = Main.sc.nextLine();
+//			name = Main.sc.nextLine();
+			name = Main.inputValid();
 			System.out.println("Change publisher address");
-			address = Main.sc.nextLine();
+//			address = Main.sc.nextLine();
+			address = Main.inputValid();
 			try{
 				BufferedReader bufStream = new BufferedReader (new FileReader(fileName));
 				StringBuffer buffer = new StringBuffer();
@@ -176,6 +178,7 @@ public class Publisher {
 	}
 	public static void deletePublishers() {
 		//reads file
+		int optionId;
 		try(BufferedReader bufStream = new BufferedReader (new FileReader(fileName))){
 			String line = bufStream.readLine();
 			while(line!=null) {
@@ -191,6 +194,7 @@ public class Publisher {
 		String userInput;
 		System.out.println("Choose author ID");
 		userInput = Main.sc.nextLine();
+//		optionId = validOption();
 			
 		try(BufferedReader buffStream = new BufferedReader (new FileReader(fileName))) {
 			StringBuffer buffer = new StringBuffer();

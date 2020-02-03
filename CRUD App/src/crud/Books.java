@@ -82,7 +82,8 @@ public class Books {
 		int id = 0;
 		String name = null;
 		System.out.println("Add new book");
-		name = Main.sc.nextLine();
+//		name = Main.sc.nextLine();
+		name = Main.inputValid();
 		//read authors
 		Author.readAuthors();
 		
@@ -188,7 +189,8 @@ public class Books {
 		System.out.println("Choose Book ID");
 		int optionId = validOption();
 		System.out.println("Change Book name");
-		name = Main.sc.nextLine();
+//		name = Main.sc.nextLine();
+		name = Main.inputValid();
 		//update author
 		Author.readAuthors();
 		
